@@ -48,5 +48,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+
+	<key>NFCReaderUsageDescription</key>
+    <string>Uygulama NFC etiketlerini okumak için NFC'yi kullanır.</string>
+   
 </dict>
 </plist>
