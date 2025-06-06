@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
-import Nfc from './src/Nfc'
+import Nfc from './src/screens/Nfc'
 const App = () => {
   return (
     <Nfc/>
