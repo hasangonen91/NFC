@@ -166,13 +166,3 @@ A custom modal provides a rich UI for NFC scanning:
 - [Clipboard API](https://github.com/react-native-clipboard/clipboard)
 
 ---
-
-## 👏 Contribution & License
-
-Pull requests and contributions are welcome!  
-This project is licensed under the MIT License.
-
----
-
-> **Note:**  
-> Don’t forget to add your own screenshots and demo video in the reserved sections above to showcase your app.
