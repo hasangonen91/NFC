@@ -3,8 +3,6 @@
 This project is a robust **React Native** template demonstrating modern, user-friendly **NFC tag and EMV (credit card) reading**.  
 It uses a custom React hook for NFC operations and an animated modal for rich user experience.
 
-> **🚩 Space reserved below for screenshots and demo video. Add your own images or demo clips for best presentation.**
-
 ---
 
 ## 📸 Demo & Screenshots
