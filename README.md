@@ -1,14 +1,49 @@
-This is a new [**React Native**](https://reactnative.dev) project, bootstrapped using [`@react-native-community/cli`](https://github.com/react-native-community/cli).
+# React Native NFC Reader Example
 
-# Getting Started
+This project is a robust **React Native** template demonstrating modern, user-friendly **NFC tag and EMV (credit card) reading**.  
+It uses a custom React hook for NFC operations and an animated modal for rich user experience.
 
-> **Note**: Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+> **🚩 Space reserved below for screenshots and demo video. Add your own images or demo clips for best presentation.**
 
-## Step 1: Start Metro
+---
 
-First, you will need to run **Metro**, the JavaScript build tool for React Native.
+## 📸 Demo & Screenshots
 
-To start the Metro dev server, run the following command from the root of your React Native project:
+Below you can see a step-by-step NFC reading flow.  
+The screenshots are shown side by side and resized for a compact overview:
+
+<p align="center">
+  <img src="https://github.com/user-attachments/assets/b76761d1-f93f-416e-9704-02e98fedb969" alt="NFC Start" width="180" style="display:inline-block; margin-right:8px;" />
+  <img src="https://github.com/user-attachments/assets/c2fe56e6-6406-4c39-9eba-0ec4dbad268c" alt="Scanning Progress" width="180" style="display:inline-block; margin-right:8px;" />
+  <img src="https://github.com/user-attachments/assets/0157adbb-f029-444b-898f-08ece72a2dd7" alt="NFC Result" width="180" style="display:inline-block;" />
+</p>
+
+<p align="center">
+  <b>1.</b> Start NFC  &nbsp;&nbsp;&nbsp;
+  <b>2.</b> Scanning  &nbsp;&nbsp;&nbsp;
+  <b>3.</b> Result
+</p>
+
+
+## 🎬 Demo Video
+
+You can watch a full demo of the NFC reader in action below:
+
+<p align="center">
+  <video src="https://github.com/user-attachments/assets/761924eb-e72f-400a-88c3-ec74d9a02877" controls width="360"></video>
+</p>
+
+---
+
+---
+
+## 🚀 Getting Started
+
+> **Note:** Make sure you have completed the [Set Up Your Environment](https://reactnative.dev/docs/set-up-your-environment) guide before proceeding.
+
+### 1. Start Metro
+
+Start the Metro JavaScript build tool:
 
 ```sh
 # Using npm
@@ -18,80 +53,126 @@ npm start
 yarn start
 ```
 
-## Step 2: Build and run your app
+### 2. Build and run your app
 
-With Metro running, open a new terminal window/pane from the root of your React Native project, and use one of the following commands to build and run your Android or iOS app:
+Open a new terminal and run:
 
-### Android
+#### Android
 
 ```sh
-# Using npm
 npm run android
-
-# OR using Yarn
+# OR
 yarn android
 ```
 
-### iOS
+#### iOS
 
-For iOS, remember to install CocoaPods dependencies (this only needs to be run on first clone or after updating native deps).
-
-The first time you create a new project, run the Ruby bundler to install CocoaPods itself:
+First install CocoaPods dependencies if not already:
 
 ```sh
 bundle install
-```
-
-Then, and every time you update your native dependencies, run:
-
-```sh
 bundle exec pod install
 ```
 
-For more information, please visit [CocoaPods Getting Started guide](https://guides.cocoapods.org/using/getting-started.html).
+Then:
 
 ```sh
-# Using npm
 npm run ios
-
-# OR using Yarn
+# OR
 yarn ios
 ```
 
-If everything is set up correctly, you should see your new app running in the Android Emulator, iOS Simulator, or your connected device.
+If everything is set up correctly, your app will run in the Android Emulator, iOS Simulator, or a connected device.
 
-This is one way to run your app — you can also build it directly from Android Studio or Xcode.
+---
 
-## Step 3: Modify your app
+## 📖 NFC Reading System & Code Overview
 
-Now that you have successfully run the app, let's make changes!
+### The `useNfc` Hook
 
-Open `App.tsx` in your text editor of choice and make some changes. When you save, your app will automatically update and reflect these changes — this is powered by [Fast Refresh](https://reactnative.dev/docs/fast-refresh).
+All NFC logic is handled in a custom hook (`useNfc`).  
+This hook:
+- Checks if NFC is enabled and reacts to changes
+- Guides the user to device settings if NFC is off
+- Reads both classic NFC tags and credit cards (EMV protocol)
+- Parses and structures all read data for easy display
+- Manages progress animation and step text during scanning
+- Handles errors and success states robustly
+- Offers utility functions for copying and modal control
 
-When you want to forcefully reload, for example to reset the state of your app, you can perform a full reload:
+**Typical flow:**
+- When scanning starts, the hook checks if NFC is enabled.
+- If not, the user is prompted to enable it.
+- The hook auto-detects if the card is EMV or a standard tag.
+- Progress bar and step messages inform the user during the process.
+- On completion, success or error feedback is shown.
+- All data (card number, tag ID, etc.) can be copied to clipboard.
 
-- **Android**: Press the <kbd>R</kbd> key twice or select **"Reload"** from the **Dev Menu**, accessed via <kbd>Ctrl</kbd> + <kbd>M</kbd> (Windows/Linux) or <kbd>Cmd ⌘</kbd> + <kbd>M</kbd> (macOS).
-- **iOS**: Press <kbd>R</kbd> in iOS Simulator.
+### The `NfcModal` Component
 
-## Congratulations! :tada:
+A custom modal provides a rich UI for NFC scanning:
+- **While scanning:** Animated NFC icon, progress bar, step message, and cancel button
+- **On completion:** Success/failure animation and detailed data card
+- **Data rows:** Each row is easily copyable and styled for clarity
+- Modal smoothly animates in/out, acting like a bottom sheet
+- Data display adapts to both credit cards and NFC tags
 
-You've successfully run and modified your React Native App. :partying_face:
+**UX features:**
+- Progress and step feedback during scanning
+- Clear animations for error or success
+- Data display is modern, readable, and copy-enabled
 
-### Now what?
+---
 
-- If you want to add this new React Native code to an existing application, check out the [Integration guide](https://reactnative.dev/docs/integration-with-existing-apps).
-- If you're curious to learn more about React Native, check out the [docs](https://reactnative.dev/docs/getting-started).
+## 📦 Project Structure
 
-# Troubleshooting
+```
+.
+├── hooks/
+│   └── useNfc.ts
+├── components/
+│   └── NfcModal.tsx
+├── assets/
+│   ├── nfc-scan.json
+│   ├── success.json
+│   └── failure.json
+├── screenshots/
+│   ├── scan.gif
+│   ├── success.png
+│   └── taginfo.png
+├── App.tsx
+└── README.md
+```
 
-If you're having issues getting the above steps to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
+---
 
-# Learn More
+## 🛠 Features
 
-To learn more about React Native, take a look at the following resources:
+- **Credit Card (EMV) Reading**
+- **Classic NFC Tag Reading (NDEF, Mifare, Ultralight, etc.)**
+- **Animated progress bar & step messaging**
+- **Lottie animations for error/success**
+- **Easy copy to clipboard**
+- **Modern, user-friendly modal**
+- **Clean, customizable, and easily extendable codebase**
 
-- [React Native Website](https://reactnative.dev) - learn more about React Native.
-- [Getting Started](https://reactnative.dev/docs/environment-setup) - an **overview** of React Native and how setup your environment.
-- [Learn the Basics](https://reactnative.dev/docs/getting-started) - a **guided tour** of the React Native **basics**.
-- [Blog](https://reactnative.dev/blog) - read the latest official React Native **Blog** posts.
-- [`@facebook/react-native`](https://github.com/facebook/react-native) - the Open Source; GitHub **repository** for React Native.
+---
+
+## 🔗 Resources
+
+- [React Native Website](https://reactnative.dev)
+- [react-native-nfc-manager](https://github.com/revtel/react-native-nfc-manager)
+- [Lottie for React Native](https://github.com/lottie-react-native/lottie-react-native)
+- [Clipboard API](https://github.com/react-native-clipboard/clipboard)
+
+---
+
+## 👏 Contribution & License
+
+Pull requests and contributions are welcome!  
+This project is licensed under the MIT License.
+
+---
+
+> **Note:**  
+> Don’t forget to add your own screenshots and demo video in the reserved sections above to showcase your app.
